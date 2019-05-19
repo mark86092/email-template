@@ -1,0 +1,22 @@
+{
+  "name": "email-template",
+  "version": "1.0.0",
+  "description": "\"GoodJob project email templates\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goodjoblife/email-template.git"
+  },
+  "author": "GoodJob Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goodjoblife/email-template/issues"
+  },
+  "homepage": "https://github.com/goodjoblife/email-template#readme",
+  "dependencies": {
+    "escape-html": "^1.0.3"
+  }
+}

@@ -131,14 +131,14 @@ const genBodyHTML = ({ username, verifyUrl}) => {
                                             <tr class="block__row">
                                               <td class="block__cell" width="100%" align="left" valign="top" style="background-color: #FFFFFF; border-radius: 4px; padding: 32px 40px;" bgcolor="#FFFFFF">
                                                 <!-- start h1 -->
-                                                <h1 class="heading-m header h1" style="color: #000000; margin: 0; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.4; font-size: 28px; font-weight: 700;">認證你的 Email</h1>
+                                                <h1 class="heading-m header h1" style="color: #000000; margin: 0; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.4; font-size: 28px; font-weight: 700;">訂閱確認</h1>
                                                 <!-- end h1 -->
                                                 <!-- start content -->
                                                 <div class="row">
                                                   <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
                                                     <tr class="row__row">
                                                       <td class="pt-xs pb-xs column col-sm-12" width="700" style="padding-bottom: 16px; padding-top: 16px;width: 100%" align="left" valign="top">
-                                                        <p class="p text p" style="display: block; color: #000000; margin: 0; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5;"> ${escapeHtml(username)} 你好，感謝你使用 goodjob 平台，點選以下按鈕認證你的 Email。 </p>
+                                                        <p class="p text p" style="display: block; color: #000000; margin: 0; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5;"> ${escapeHtml(username)} 你好，感謝你訂閱「GoodJob 職場透明化運動」，點選以下按鈕確認你的訂閱！ </p>
                                                         <div class="row">
                                                           <table class="row__table" width="100%" align="center" role="presentation" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;">
                                                             <tr class="row__row">
@@ -153,7 +153,7 @@ const genBodyHTML = ({ username, verifyUrl}) => {
                                                               <table border="0" cellspacing="0" cellpadding="0" class="table" style="border-collapse: collapse;">
                                                                 <tr class="tr">
                                                                   <td align="center" bgcolor="#fcd406;" class="td" style="border-collapse: collapse;">
-                                                                    <a href="${escapeHtml(verifyUrl)}" class="button-m a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none; padding: 10px 24px; font-weight: 700; background-color: #FCD406; color: #000000; display: inline-block;"><span class="a__text" style="text-decoration: none; color: #000000;">帳號認證</span></a>
+                                                                    <a href="${escapeHtml(verifyUrl)}" class="button-m a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none; padding: 10px 24px; font-weight: 700; background-color: #FCD406; color: #000000; display: inline-block;"><span class="a__text" style="text-decoration: none; color: #000000;">確認訂閱</span></a>
                                                                   </td>
                                                                 </tr>
                                                               </table>

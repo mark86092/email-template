@@ -2,7 +2,7 @@
 const escapeHtml = require("escape-html");
 
 const genSubject = () => {
-  return "職場透明化運動電子信箱驗證信";
+  return "GoodJob 職場透明化運動訂閱確認信";
 }
 
 const genBodyHTML = ({ username, verifyUrl}) => {

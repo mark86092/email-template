@@ -76,10 +76,6 @@
         }
       }
 
-      a {
-        color: inherit;
-      }
-
       .blue-link, a {
         font-family: "PingFang TC", "微軟正黑體", "Microsoft JhengHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
         text-decoration: none;
@@ -188,18 +184,7 @@
         line-height: 1.5;
       }
       /* strat customerized */
-      .time-and-salary-article .td, .time-and-salary-article td, .time-and-salary-article th {
-        font-size: 15px;
-        font-weight: normal;
-        line-height: 1.4;
-        padding: 4px;
-      }
-      .time-and-salary-article .td, .time-and-salary-article td {
-        color: #333;
-      }
-      .time-and-salary-article th {
-        color: #969696;
-      }
+
       /* end customerized */
     </style>
   </head>
@@ -210,7 +195,7 @@
           <td style="padding-top: 40px;padding-bottom: 40px">
             <!-- start logo -->
             <container class="main-container pb-xs">
-                            <p class="center">
+              <p class="center">
                 <a href="https://www.goodjob.life"><img
                   src="https://image.goodjob.life/logo_570x70.png"
                   width="285"
@@ -223,15 +208,56 @@
             <!-- start content -->
             <container class="main-container">
               <block class="white-block">
+                <p class="center mb-xs">
+                  <img src="https://image.goodjob.life/email/clapping.gif" width="70" height="70" />
+                </p>
                 <!-- start h1 -->
-                <h1 class="heading-m">標題 1</h1>
+                <h1 class="heading-m">哈囉 wutingy，你的面試經驗文章已經幫助了 30 位求職者</h1>
                 <!-- end h1 -->
 
                 <!-- start content -->
                 <row>
                   <column class="pt-xs pb-xs">
-                    <p class="p">
-											text....
+                    <p class="p mb-xs">
+											真棒！避免大家找工作時踩雷，也讓好的公司被看見，台灣的職場因為有你變得更美好 😉
+                    </p>
+                    <block class="article">
+                      <a href="https://google.com">
+                          <h2 class="subheading-m-bold mb-xxs">碩誠國際股份有限公司 軟體工程師</h2>
+                          <p class="p-s">面試過程
+                              第一次面試：還行，人都蠻親切
+                              第二次面試：
+                              工作環境：外派，實際需要看客戶地點
+                              給其他面試者的中肯建議
+                              如何準備面試：主要還是要增強自己工作實力
+                              是否推薦此份工作：還行
+                              其他注意事項：</p>
+                      </a>
+                    </block>
+                    <p class="p mt-xs mb-xs">
+                      歡迎隨時回來和大家分享你的工作心得或觀察，讓這個屬於勞方的資料庫更強大！
+                    </p>
+                    <!-- start button -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="left">
+                          <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td align="center" bgcolor="#fcd406;">
+                                <a href="https://google.com" class="button-m">留下你的工作心得</a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                    <!-- end button -->
+
+                    <p class="p mt-s">
+                      或是查看<span class="bold">軟體工程師</span>領域的精選文章：<br />
+                      <a class="border-blue-link" href="https://google.com">達佛羅 工作經驗分享 1</a><br />
+                      <a class="border-blue-link" href="https://google.com">達佛羅 工作經驗分享 2</a><br />
+                      <a class="border-blue-link" href="https://google.com">達佛羅 工作經驗分享 3</a>
                     </p>
                   </column>
                 </row>

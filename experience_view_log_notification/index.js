@@ -7,19 +7,19 @@ const mapping = {
   "intern": "實習心得",
 };
 
-const genSubject = ({ username, experience, nViews }) => {
-  return `哈囉 ${username}，你的${mapping[experience.type]}文章已經幫助了 ${nViews} 位求職者`;
+const genSubject = ({ username, experience }) => {
+  return `哈囉 ${username}，你的${mapping[experience.type]}文章已經幫助了 ${experience.viewCount} 位求職者`;
 }
 
 /**
  * @param {string} params.username 使用者名稱
- * @param {string} params.nViews 瀏覽次數
+ * @param {string} params.experience.viewCount 瀏覽次數
  * @param {string} params.experience.title 職場經驗標題
  * @param {string} params.experience.type 職場經驗種類
  * @param {string} params.experience.content 職場經驗內容
  * @param {string} params.experience.url 職場經驗網址
- * @param {string} params.ctaBtnText call to action 按鈕的文字
- * @param {string} params.ctaBtnUrl call to action 按鈕的網址
+ * @param {string} params.callToActionButtonText call to action 按鈕的文字
+ * @param {string} params.callToActionButtonUrl call to action 按鈕的網址
  * @param {string} params.relatedFieldKeyword 相關領域的關鍵字
  * @param {string} params.relatedExperiences 相關領域文章列表
  * @param {string} params.relatedExperiences[i].title 相關領域文章標題
@@ -27,10 +27,9 @@ const genSubject = ({ username, experience, nViews }) => {
  */
 const genBodyHTML = ({
   username,
-  nViews,
   experience,
-  ctaBtnText,
-  ctaBtnUrl,
+  callToActionButtonText,
+  callToActionButtonUrl,
   relatedFieldKeyword,
   relatedExperiences,
 }) => {
@@ -162,7 +161,7 @@ const genBodyHTML = ({
                                                   <img src="https://image.goodjob.life/email/clapping.gif" width="70" height="70" border="0" alt="" class="img__block" style="display: block; max-width: 100%; margin-right: auto; margin-left: auto;" />
                                                 </p>
                                                 <!-- start h1 -->
-                                                <h1 class="heading-m header h1" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.4; font-size: 28px; font-weight: 700;">哈囉 ${username}，你的${mapping[experience.type]}文章已經幫助了 ${nViews} 位求職者</h1>
+                                                <h1 class="heading-m header h1" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.4; font-size: 28px; font-weight: 700;">哈囉 ${username}，你的${mapping[experience.type]}文章已經幫助了 ${experience.viewCount} 位求職者</h1>
                                                 <!-- end h1 -->
                                                 <!-- start content -->
                                                 <div class="row">
@@ -192,7 +191,7 @@ const genBodyHTML = ({
                                                               <table border="0" cellspacing="0" cellpadding="0" class="table" style="border-collapse: collapse;">
                                                                 <tr class="tr">
                                                                   <td align="center" bgcolor="#fcd406;" class="td" style="border-collapse: collapse;">
-                                                                    <a href="${escapeHtml(ctaBtnUrl)}" class="button-m a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none; padding: 10px 24px; font-weight: 700; background-color: #FCD406; color: #000000; display: inline-block;"><span class="a__text" style="text-decoration: none; color: #000000;">${ctaBtnText}</span></a>
+                                                                    <a href="${escapeHtml(callToActionButtonUrl)}" class="button-m a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none; padding: 10px 24px; font-weight: 700; background-color: #FCD406; color: #000000; display: inline-block;"><span class="a__text" style="text-decoration: none; color: #000000;">${callToActionButtonText}</span></a>
                                                                   </td>
                                                                 </tr>
                                                               </table>

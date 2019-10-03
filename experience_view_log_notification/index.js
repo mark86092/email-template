@@ -1,37 +1,35 @@
 
 const escapeHtml = require("escape-html");
 
-const mapping = {
-  "interview": "面試經驗",
-  "work": "工作心得",
-  "intern": "實習心得",
-};
-
+/**
+ * @param {string} params.username 使用者名稱
+ * @param {string} params.experience.viewCount 瀏覽次數
+ * @param {string=["面試經驗", "工作心得", "實習心得"]} params.experience.typeName 職場經驗種類
+ */
 const genSubject = ({ username, experience }) => {
-  return `哈囉 ${username}，你的${mapping[experience.type]}文章已經幫助了 ${experience.viewCount} 位求職者`;
+  return `哈囉 ${username}，你的${experience.typeName}文章已經幫助了 ${experience.viewCount} 位求職者`;
 }
+
+// TODO: temporally fixed
+const callToActionButtonUrl = 'https://www.goodjob.life/share/interview/step1?utm_source=goodjob&utm_medium=email&utm_campaign=experience_view_log_notification_call_to_action_button';
+const callToActionButtonText = '留下你的面試經驗';
 
 /**
  * @param {string} params.username 使用者名稱
  * @param {string} params.experience.viewCount 瀏覽次數
  * @param {string} params.experience.title 職場經驗標題
- * @param {string} params.experience.type 職場經驗種類
+ * @param {string=["面試經驗", "工作心得", "實習心得"]} params.experience.typeName 職場經驗種類
  * @param {string} params.experience.content 職場經驗內容
  * @param {string} params.experience.url 職場經驗網址
- * @param {string} params.callToActionButtonText call to action 按鈕的文字
- * @param {string} params.callToActionButtonUrl call to action 按鈕的網址
- * @param {string} params.relatedFieldKeyword 相關領域的關鍵字
- * @param {string} params.relatedExperiences 相關領域文章列表
- * @param {string} params.relatedExperiences[i].title 相關領域文章標題
- * @param {string} params.relatedExperiences[i].url 相關領域文章連結
+ * @param {string} params.relatedContent.keyword 相關領域的關鍵字
+ * @param {string} params.relatedContent.experiences 相關領域文章列表
+ * @param {string} params.relatedContent.experiences[i].title 相關領域文章標題
+ * @param {string} params.relatedContent.experiences[i].url 相關領域文章連結
  */
 const genBodyHTML = ({
   username,
   experience,
-  callToActionButtonText,
-  callToActionButtonUrl,
-  relatedFieldKeyword,
-  relatedExperiences,
+  relatedContent,
 }) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
   <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -138,7 +136,7 @@ const genBodyHTML = ({
                               <tr class="container__row">
                                 <td class="container__cell" width="100%" align="left" valign="top" style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px;">
                                   <p class="center text p" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; width: 100%; display: block; text-align: center; margin-left: auto; margin-right: auto;">
-                                    <a href="${experience.url}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;"><img src="https://image.goodjob.life/logo_570x70.png" width="285" height="35" alt="goodjob 職場透明化運動" border="0" class="img__block" style="display: block; max-width: 100%; margin-right: auto; margin-left: auto;" /></span></a>
+                                    <a href="${escapeHtml(experience.url)}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;"><img src="https://image.goodjob.life/logo_570x70.png" width="285" height="35" alt="goodjob 職場透明化運動" border="0" class="img__block" style="display: block; max-width: 100%; margin-right: auto; margin-left: auto;" /></span></a>
                                   </p>
                                 </td>
                               </tr>
@@ -161,7 +159,7 @@ const genBodyHTML = ({
                                                   <img src="https://image.goodjob.life/email/clapping.gif" width="70" height="70" border="0" alt="" class="img__block" style="display: block; max-width: 100%; margin-right: auto; margin-left: auto;" />
                                                 </p>
                                                 <!-- start h1 -->
-                                                <h1 class="heading-m header h1" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.4; font-size: 28px; font-weight: 700;">哈囉 ${username}，你的${mapping[experience.type]}文章已經幫助了 ${experience.viewCount} 位求職者</h1>
+                                                <h1 class="heading-m header h1" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.4; font-size: 28px; font-weight: 700;">哈囉 ${username}，你的${experience.typeName}文章已經幫助了 ${experience.viewCount} 位求職者</h1>
                                                 <!-- end h1 -->
                                                 <!-- start content -->
                                                 <div class="row">
@@ -174,7 +172,7 @@ const genBodyHTML = ({
                                                               <td> <![endif]--> <table class="block__table" role="presentation" border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
                                                                   <tr class="block__row">
                                                                     <td class="block__cell" width="100%" align="left" valign="top" style="background-color: #FFFFFF; border-radius: 4px; border: 1px solid #EEEEEE; box-shadow: 0 0 5px #DDDDDD; padding: 24px;" bgcolor="#FFFFFF">
-                                                                      <a href="${experience.url}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;">
+                                                                      <a href="${escapeHtml(experience.url)}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;">
                                                                           <h2 class="subheading-m-bold mb-xxs header h2" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 18px; font-weight: 700; line-height: 1.3; margin-bottom: 8px;">${experience.title}</h2>
                                                                           <p class="p-s text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 15px; line-height: 1.4;">${experience.content}</p>
                                                                         </span></a>
@@ -183,7 +181,7 @@ const genBodyHTML = ({
                                                                 </table> <!--[if mso | IE]> </td>
                                                             </tr>
                                                           </table> <![endif]--> </div>
-                                                        <p class="p mt-xs mb-xs text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; margin-top: 16px; margin-bottom: 16px;"> 歡迎隨時回來和大家分享你的工作心得或觀察，讓這個屬於勞方的資料庫更強大！ </p>
+                                                        <p class="p mt-xs mb-xs text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; margin-top: 16px; margin-bottom: 16px;"> 歡迎隨時回來和大家分享你的薪資、面試經驗或工作心得，讓這個屬於勞方的資料庫更強大！ </p>
                                                         <!-- start button -->
                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table" style="border-collapse: collapse;">
                                                           <tr class="tr">
@@ -199,9 +197,12 @@ const genBodyHTML = ({
                                                           </tr>
                                                         </table>
                                                         <!-- end button -->
-                                                        <p class="p mt-s text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; margin-top: 32px;"> 或是查看<span class="bold" style="font-weight: 700;">${relatedFieldKeyword}</span>領域的精選文章：<br />
-                                                          ${relatedExperiences.map(exp => `<a class="border-blue-link a" href="${escapeHtml(exp.url)}" style="font-size: 16px; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: underline; color: #325BBD;"><span class="a__text" style="text-decoration: underline; color: #325BBD;">${exp.title}</span></a><br />`).join('')}
-                                                        </p>
+                                                        ${relatedContent && relatedContent.keyword && relatedContent.experiences ?
+                                                          `<p class="p mt-s text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; margin-top: 32px;"> 或是查看<span class="bold" style="font-weight: 700;">${relatedContent.keyword}</span>領域的精選文章：<br />
+                                                            ${relatedContent.experiences.map(exp => `<a class="border-blue-link a" href="${escapeHtml(exp.url)}" style="font-size: 16px; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: underline; color: #325BBD;"><span class="a__text" style="text-decoration: underline; color: #325BBD;">${exp.title}</span></a><br />`).join('')}
+                                                          </p>` : ''
+                                                        }
+
                                                       </td>
                                                     </tr>
                                                   </table>

@@ -10,9 +10,13 @@ const genSubject = ({ username, experience }) => {
   return `哈囉 ${username}，你的${experience.typeName}文章已經幫助了 ${experience.viewCount} 位求職者`;
 }
 
+// TO FIX: assume there is no query string in url
+const appendUTM = (url, source, medium, campaign) => `${url}?utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}`;
+
+
 // TODO: temporally fixed
-const callToActionButtonUrl = 'https://www.goodjob.life/share/interview/step1?utm_source=goodjob&utm_medium=email&utm_campaign=experience_view_log_notification_call_to_action_button';
-const callToActionButtonText = '留下你的面試經驗';
+const callToActionButtonUrl = appendUTM('https://www.goodjob.life/share/interview/step1', 'goodjob', 'email', 'experience_view_log-call_to_action_button');
+const callToActionButtonText = '留下你的面試經驗'; 
 
 /**
  * @param {string} params.username 使用者名稱
@@ -136,7 +140,7 @@ const genBodyHTML = ({
                               <tr class="container__row">
                                 <td class="container__cell" width="100%" align="left" valign="top" style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px;">
                                   <p class="center text p" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; width: 100%; display: block; text-align: center; margin-left: auto; margin-right: auto;">
-                                    <a href="${escapeHtml(experience.url)}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;"><img src="https://image.goodjob.life/logo_570x70.png" width="285" height="35" alt="goodjob 職場透明化運動" border="0" class="img__block" style="display: block; max-width: 100%; margin-right: auto; margin-left: auto;" /></span></a>
+                                    <a href="${escapeHtml(appendUTM('https://www.goodjob.life', 'goodjob', 'email', 'experience_view_log-logo'))}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;"><img src="https://image.goodjob.life/logo_570x70.png" width="285" height="35" alt="goodjob 職場透明化運動" border="0" class="img__block" style="display: block; max-width: 100%; margin-right: auto; margin-left: auto;" /></span></a>
                                   </p>
                                 </td>
                               </tr>
@@ -172,9 +176,9 @@ const genBodyHTML = ({
                                                               <td> <![endif]--> <table class="block__table" role="presentation" border="0" align="center" cellpadding="0" cellspacing="0" width="100%">
                                                                   <tr class="block__row">
                                                                     <td class="block__cell" width="100%" align="left" valign="top" style="background-color: #FFFFFF; border-radius: 4px; border: 1px solid #EEEEEE; box-shadow: 0 0 5px #DDDDDD; padding: 24px;" bgcolor="#FFFFFF">
-                                                                      <a href="${escapeHtml(experience.url)}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;">
+                                                                      <a href="${escapeHtml(appendUTM(experience.url, 'goodjob', 'email', 'experience_view_log-article'))}" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: none;"><span class="a__text" style="text-decoration: none;">
                                                                           <h2 class="subheading-m-bold mb-xxs header h2" style="margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 18px; font-weight: 700; line-height: 1.3; margin-bottom: 8px;">${experience.title}</h2>
-                                                                          <p class="p-s text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 15px; line-height: 1.4;">${experience.content}</p>
+                                                                          <p class="p-s text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 15px; line-height: 1.4;">${experience.content.substring(0, 100) + '...'}</p>
                                                                         </span></a>
                                                                     </td>
                                                                   </tr>
@@ -199,7 +203,7 @@ const genBodyHTML = ({
                                                         <!-- end button -->
                                                         ${relatedContent && relatedContent.keyword && relatedContent.experiences ?
                                                           `<p class="p mt-s text p" style="display: block; margin: 0; color: #333333; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5; margin-top: 32px;"> 或是查看<span class="bold" style="font-weight: 700;">${relatedContent.keyword}</span>領域的精選文章：<br />
-                                                            ${relatedContent.experiences.map(exp => `<a class="border-blue-link a" href="${escapeHtml(exp.url)}" style="font-size: 16px; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: underline; color: #325BBD;"><span class="a__text" style="text-decoration: underline; color: #325BBD;">${exp.title}</span></a><br />`).join('')}
+                                                            ${relatedContent.experiences.map(exp => `<a class="border-blue-link a" href="${escapeHtml(appendUTM(exp.url, 'goodjob', 'email', 'experience_view_log-related_articles'))}" style="font-size: 16px; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; text-decoration: underline; color: #325BBD;"><span class="a__text" style="text-decoration: underline; color: #325BBD;">${exp.title}</span></a><br />`).join('')}
                                                           </p>` : ''
                                                         }
 
@@ -226,7 +230,7 @@ const genBodyHTML = ({
                               <tr class="container__row">
                                 <td class="container__cell" width="100%" align="left" valign="top" style="padding-left: 16px; padding-right: 16px; padding-bottom: 16px; padding-top: 16px;">
                                   <p class="footer text p" style="display: block; margin: 0; font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; line-height: 1.5; color: #999999; font-size: 14px; text-align: center;">
-                                    <span>© GoodJob.life team</span>&nbsp;&nbsp;<a href="https://www.goodjob.life" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; color: #999999; text-decoration: none;"><span class="a__text" style="color: #999999; text-decoration: none;">官方網站</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.facebook.com/goodjob.life" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; color: #999999; text-decoration: none;"><span class="a__text" style="color: #999999; text-decoration: none;">facebook</span></a>
+                                    <span>© GoodJob.life team</span>&nbsp;&nbsp;<a href="https://www.goodjob.life?utm_source=goodjob&utm_medium=email&utm_campaign=experience_view_log_notification_official_website_button" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; color: #999999; text-decoration: none;"><span class="a__text" style="color: #999999; text-decoration: none;">官方網站</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://www.facebook.com/goodjob.life" class="a" style="font-family: 'PingFang TC','微軟正黑體','Microsoft JhengHei','Helvetica Neue',Helvetica,Arial,sans-serif; color: #999999; text-decoration: none;"><span class="a__text" style="color: #999999; text-decoration: none;">facebook</span></a>
                                   </p>
                                 </td>
                               </tr>

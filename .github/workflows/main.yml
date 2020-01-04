@@ -8,5 +8,8 @@ jobs:
       # To use this repository's private action, you must check out the repository
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Hello world action step
-        run: echo Hello world
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: yarn install

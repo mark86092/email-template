@@ -1,5 +1,5 @@
 {
-  "name": "email-template",
+  "name": "@mark86092/email-template",
   "version": "1.3.1",
   "description": "\"GoodJob project email templates\"",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goodjoblife/email-template.git"
+    "url": "git+https://github.com/mark86092/email-template.git"
   },
   "author": "GoodJob Team",
   "license": "ISC",
